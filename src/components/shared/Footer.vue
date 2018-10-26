@@ -3,10 +3,10 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <p>&copy; 2013 - {{ getYear }} Midigator, LLC | All Rights Reserved</p>
+          <p>&copy; 2013 - {{ getYear }} All Rights Reserved</p>
         </div>
         <div class="col-sm-6">
-          <a class="privacy-policy" href="https://midigator.com/privacy.html" target="_blank">Privacy Policy</a>
+          <a class="privacy-policy" href="#" target="_blank">Privacy Policy</a>
         </div>
       </div>
     </div>
