@@ -1,0 +1,87 @@
+/* ==== HELPERS ==== */
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.block {
+    display: block;
+}
+
+.inline {
+    display: inline;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.hide {
+    display: none !important;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+.show-block {
+    display: block !important;
+}
+
+.show-inline {
+    display: inline !important;
+}
+
+.show-inline-block {
+    display: inline-block !important;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #c6c6c6;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: #c6c6c6;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+    color: #c6c6c6;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #c6c6c6;
+}
