@@ -1,6 +1,6 @@
 # roi
 
-> Midigator ROI calculator
+> ROI calculator
 
 ## Build Setup
 

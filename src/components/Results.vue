@@ -64,12 +64,12 @@
                 <tr>
                   <td>Chargeback win rate</td>
                   <td>{{ userInput.chargebackWinRate }}%</td>
-                  <td>{{ midigatorWinRate }}%</td>
+                  <td>{{ ourWinRate }}%</td>
                 </tr>
                 <tr>
                   <td>Monthly recovered revenue</td>
                   <td>${{ formatNum(currentMonthlyRecovered) }}</td>
-                  <td>${{ formatNum(midiMonthlyRecovered) }}</td>
+                  <td>${{ formatNum(ourMonthlyRecovered) }}</td>
                 </tr>
                 <tr>
                   <td class="labor-cost">
@@ -90,19 +90,19 @@
                       message="Based on average market value for chargeback management services" />
                   </td>
                   <td>${{ formatNum(currentCostOfServices) }}</td>
-                  <td>${{ formatNum(midiCostOfServices) }}</td>
+                  <td>${{ formatNum(ourCostOfServices) }}</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <td><strong>Net monthly profit</strong></td>
                   <td><strong>${{ formatNum(currentMonthlyProfit) }}</strong></td>
-                  <td><strong>${{ formatNum(midiMonthlyProfit) }}</strong></td>
+                  <td><strong>${{ formatNum(ourMonthlyProfit) }}</strong></td>
                 </tr>
                 <tr>
                   <td><strong>Monthly return on investment</strong></td>
                   <td><strong>{{ formatNum(currentMonthlyROI) }}%</strong></td>
-                  <td><strong class="final-estimated-savings">{{ formatNum(midiMonthlyROI) }}%</strong></td>
+                  <td><strong class="final-estimated-savings">{{ formatNum(ourMonthlyROI) }}%</strong></td>
                 </tr>
               </tfoot>
             </table>
@@ -115,7 +115,7 @@
             <div class="circle-chart">
               <div class="circle-inner">
                 <p>Receive a</p>
-                <p class="circle-savings"><strong v-html="midiMonthlyROI"></strong><span>%</span></p>
+                <p class="circle-savings"><strong v-html="ourMonthlyROI"></strong><span>%</span></p>
                 <p>ROI</p>
               </div>
             </div>
@@ -128,9 +128,9 @@
             </div>
             <div class="line-chart-box clearfix">
               <p class="float-left">With Us</p>
-              <p class="line-chart-price"><strong>${{ formatNum(midiMonthlyRecovered) }} / ${{ formatNum(_chargebackCost) }}</strong></p>
-              <div class="line-chart-bg line-chart-midigator">
-                <div class="line-chart-midigator-progress" :style="midiLineCalc"></div>
+              <p class="line-chart-price"><strong>${{ formatNum(ourMonthlyRecovered) }} / ${{ formatNum(_chargebackCost) }}</strong></p>
+              <div class="line-chart-bg line-chart-us">
+                <div class="line-chart-us-progress" :style="ourLineCalc"></div>
               </div>
             </div>
           </div>
@@ -155,8 +155,8 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="recovered-revenue-box app-box-shadow midigator">
-            <p class="recovered-number">${{ formatNum(midiAnual) }}</p>
+          <div class="recovered-revenue-box app-box-shadow us">
+            <p class="recovered-number">${{ formatNum(ourAnual) }}</p>
             <p>With Us</p>
           </div>
         </div>
@@ -169,23 +169,6 @@
       </div> <!-- .row END -->
     </div>
 
-    <!-- <div class="fluid demo-row-fluid">
-      <div class="demo-row-bg">&nbsp;</div>
-      <div class="container">
-        <div class="row demo-row">
-          <div class="col-sm-7">
-            <h2>Request a Demo Today!</h2>
-            <p>Our team is eager to find out how Midigator can help keep your business protected and profitable. Click the button below to request a free demo!</p>
-            <button class="primary-button demo-button">REQUEST A DEMO</button>
-          </div>
-          <div class="col-sm-5 demo-img-col">
-            <img class="midigator-screenshot" src="@/assets/images/midigator-platform.png" alt="Midigator Platform">
-            <img class="midigator-savings" src="@/assets/images/midigator-chart.png" alt="Midigator Savings">
-          </div>
-        </div>
-      </div>
-    </div> -->
-
   </div> <!-- .container.fluid END -->
 
 </template>
@@ -193,7 +176,6 @@
 <script>
 import { mapState } from 'vuex'
 import Tooltip from '@/components/shared/Tooltip'
-// import axios from 'axios'
 
 export default {
   name: 'results',
@@ -201,20 +183,19 @@ export default {
   data () {
     return {
       routeProgress: 100,
-      midigatorWinRate: 75
+      ourWinRate: 75
     }
   },
   computed: {
     ...mapState([
-      'userInput',
-      'sendInput'
+      'userInput'
     ]),
 
     /**
      * HEADLINE ==================================================================
      */
     headlineSavings: function () {
-      let calc = Math.round(this._chargebackCost * (this.midigatorWinRate / 100))
+      let calc = Math.round(this._chargebackCost * (this.ourWinRate / 100))
       return this.formatNum(calc)
     },
 
@@ -240,8 +221,8 @@ export default {
       return this._chargebackCost * (this.userInput.chargebackWinRate / 100)
     },
 
-    midiMonthlyRecovered: function () {
-      return this._chargebackCost * (this._midiWinRate / 100)
+    ourMonthlyRecovered: function () {
+      return this._chargebackCost * (this._ourWinRate / 100)
     },
 
     currentCostOfServices: function () {
@@ -250,7 +231,7 @@ export default {
         : 0
     },
 
-    midiCostOfServices: function () {
+    ourCostOfServices: function () {
       return this.userInput.chargebackCount * 8
     },
 
@@ -258,8 +239,8 @@ export default {
       return this.currentMonthlyRecovered - this.laborCost - this.currentCostOfServices
     },
 
-    midiMonthlyProfit: function () {
-      return this.midiMonthlyRecovered - this.midiCostOfServices
+    ourMonthlyProfit: function () {
+      return this.ourMonthlyRecovered - this.ourCostOfServices
     },
 
     currentMonthlyROI: function () {
@@ -268,20 +249,20 @@ export default {
       return isNaN(costs) ? 0 : costs.toFixed(2)
     },
 
-    midiMonthlyROI: function () {
-      let costs = (this.midiMonthlyProfit - this.midiCostOfServices) / this.midiCostOfServices * 100
+    ourMonthlyROI: function () {
+      let costs = (this.ourMonthlyProfit - this.ourCostOfServices) / this.ourCostOfServices * 100
       return costs.toFixed(2)
     },
 
     /**
-     * MIDIGATOR DIFFERENCE ======================================================
+     * OUR DIFFERENCE ======================================================
      */
     circleSavings: function () {
-      let midiSavings = Math.round(this.midiMonthlyRecovered)
+      let ourSavings = Math.round(this.ourMonthlyRecovered)
       let userSavings = Math.round(this.currentMonthlyRecovered)
-      let calc = ((midiSavings - userSavings) / userSavings * 100).toFixed(2)
+      let calc = ((ourSavings - userSavings) / userSavings * 100).toFixed(2)
       return this.userInput.chargebackWinRate === 0
-        ? '<div class="midi-recovered"><span>$</span> ' + this.formatNum(this.midiMonthlyRecovered) + '</div>'
+        ? '<div class="our-recovered"><span>$</span> ' + this.formatNum(this.ourMonthlyRecovered) + '</div>'
         : calc + '<span>%</span>'
     },
 
@@ -291,8 +272,8 @@ export default {
       return 'width:' + calcString + '%'
     },
 
-    midiLineCalc: function () {
-      let calc = (Math.round(this.midiMonthlyRecovered) / Math.round(this._chargebackCost)) * 100
+    ourLineCalc: function () {
+      let calc = (Math.round(this.ourMonthlyRecovered) / Math.round(this._chargebackCost)) * 100
       let calcString = Math.round(calc).toString()
       return 'width:' + calcString + '%'
     },
@@ -304,12 +285,12 @@ export default {
       return this.currentMonthlyProfit * 12
     },
 
-    midiAnual: function () {
-      return this.midiMonthlyProfit * 12
+    ourAnual: function () {
+      return this.ourMonthlyProfit * 12
     },
 
     yearlySavings: function () {
-      return (Math.round(this.midiMonthlyProfit * 12) - Math.round(this.currentMonthlyProfit * 12))
+      return (Math.round(this.ourMonthlyProfit * 12) - Math.round(this.currentMonthlyProfit * 12))
     },
 
     /**
@@ -320,7 +301,7 @@ export default {
       return this.userInput.chargebackCount * this.userInput.averageTicket
     },
 
-    _midiWinRate: function () {
+    _ourWinRate: function () {
       let userWinRate = this.userInput.chargebackWinRate
       return userWinRate >= 75
         ? userWinRate + 5
@@ -335,9 +316,9 @@ export default {
 
     winRateAdjust: function () {
       let userWinRate = this.userInput.chargebackWinRate
-      this.midigatorWinRate = userWinRate >= this.midigatorWinRate
+      this.ourWinRate = userWinRate >= this.ourWinRate
         ? userWinRate + 5
-        : this.midigatorWinRate
+        : this.ourWinRate
     }
   },
 
@@ -347,29 +328,9 @@ export default {
 
   mounted: function () {
     this.$store.dispatch('updateProgress', this.routeProgress)
-    /* eslint-disable */
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag(){dataLayer.push(arguments);}
-    // gtag('js', new Date());
-
-    // gtag('config', 'AW-944877468');
-    // gtag('event', 'conversion', {'send_to': 'AW-944877468/njqBCLCFo2cQnN_GwgM'})
-    /* eslint-enable */
   },
 
   created: function () {
-    // if (this.sendInput) {
-    //   axios.post('https://hooks.zapier.com/hooks/catch/1780841/q4wu0v/', JSON.stringify(this.userInput))
-    //     .then(response => {
-    //       // JSON responses are automatically parsed.
-    //       // this.info = response.data
-    //       this.$store.dispatch('httpFlag', false)
-    //       // console.log(response.data)
-    //     })
-    //     .catch(e => {
-    //       console.log(this.errors)
-    //     })
-    // }
   }
 }
 </script>
@@ -528,7 +489,7 @@ export default {
     }
   }
 
-  .midi-recovered {
+  .our-recovered {
     font-size: 36px;
   }
 
@@ -555,7 +516,7 @@ export default {
     transition: width 0.5s;
   }
 
-  .line-chart-midigator-progress {
+  .line-chart-us-progress {
     height: 30px;
     background-color: $primary-color;
     transition: width 0.5s;
@@ -637,12 +598,12 @@ export default {
     margin-bottom: 50px;
   }
 
-  .midigator-savings {
+  .our-savings {
     width: 260px;
     margin-top: -140px;
   }
 
-  .midigator-screenshot {
+  .our-screenshot {
     padding-left: 50px;
   }
 
@@ -775,7 +736,7 @@ export default {
           margin-top: -110px;
         }
 
-        &.midigator {
+        &.us {
           padding-top: 75px;
           margin-top: -75px;
         }
@@ -798,11 +759,11 @@ export default {
       margin-bottom: -63px;
     }
 
-    .midigator-savings {
+    .our-savings {
       margin-left: -100px;
     }
 
-    .midigator-screenshot {
+    .our-screenshot {
       padding-left: 0;
       margin-top: 135px;
     }
@@ -820,7 +781,7 @@ export default {
       height: 200px;
     }
 
-    .midi-recovered {
+    .our-recovered {
       font-size: 30px;
     }
 
@@ -855,7 +816,7 @@ export default {
       height: 250px;
     }
 
-    .midigator-screenshot {
+    .our-screenshot {
       margin-top: 70px;
     }
 
@@ -908,7 +869,7 @@ export default {
       }
     }
 
-    .midigator-screenshot {
+    .our-screenshot {
       margin-top: 0;
     }
 
