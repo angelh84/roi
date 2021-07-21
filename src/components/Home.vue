@@ -4,7 +4,7 @@
       <div class="col-sm-7 col-lg-6">
         <div class="home-left-content">
           <h1>Calculate Your ROI</h1>
-          <p>How would our outcome compare to your current chargeback management efforts? Enter a few numbers into our ROI calculator and see for yourself!</p>
+          <p>How would our outcome compare to your current financial efforts? Enter a few numbers into our ROI calculator and see for yourself!</p>
           <button type="button" class="primary-button start-button" @click="next">START</button>
         </div>
       </div>

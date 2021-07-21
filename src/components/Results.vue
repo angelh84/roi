@@ -25,7 +25,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Chargebacks per month</td>
+                  <td>Events per month</td>
                   <td>{{ formatNum(userInput.chargebackCount) }}</td>
                 </tr>
                 <tr>
@@ -39,7 +39,7 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <td>Total cost of chargebacks</td>
+                  <td>Total cost of events</td>
                   <td><strong>${{ formatNum(totalCostOfChargebacks) }}</strong> <span class="per-month">/mo</span></td>
                 </tr>
               </tfoot>
@@ -51,7 +51,7 @@
               <thead>
                 <tr>
                   <th colspan="3">
-                    <div class="results-headline">ESTIMATED ROI FOR CHARGEBACK MANAGEMENT</div>
+                    <div class="results-headline">ESTIMATED ROI FOR EVENT MANAGEMENT</div>
                   </th>
                 </tr>
                 <tr class="table-subhead">
@@ -62,7 +62,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Chargeback win rate</td>
+                  <td>Win rate</td>
                   <td>{{ userInput.chargebackWinRate }}%</td>
                   <td>{{ ourWinRate }}%</td>
                 </tr>
@@ -111,7 +111,7 @@
         <div class="col-sm-4 graph-col">
           <div class="results-headline">BREAKDOWN</div>
           <div class="app-box-shadow">
-            <p class="text-center">Monthly Chargeback Revenue Recovery</p>
+            <p class="text-center">Monthly Revenue Recovery</p>
             <div class="circle-chart">
               <div class="circle-inner">
                 <p>Receive a</p>
